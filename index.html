@@ -1,0 +1,1534 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>CEZOO</title>
+
+<style>
+
+/* =========================================================
+   BASIC PAGE
+========================================================= */
+
+*{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    padding-bottom:
+        calc(
+            88px +
+            env(safe-area-inset-bottom)
+        );
+}
+
+
+/* =========================================================
+   CEZOO PREMIUM BOTTOM BAR
+========================================================= */
+
+.cezooPremiumBar{
+
+    position:fixed;
+
+    left:12px;
+    right:12px;
+
+    bottom:
+        calc(
+            10px +
+            env(safe-area-inset-bottom)
+        );
+
+    height:70px;
+
+    display:flex;
+
+    background:#fff;
+
+    border:
+        1px solid rgba(0,0,0,.06);
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    z-index:99999;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.12),
+        0 3px 8px rgba(0,0,0,.05);
+
+}
+
+
+/* =========================================================
+   LEFT AREA
+========================================================= */
+
+.cezooPremiumLeft{
+
+    position:relative;
+
+    flex:1;
+
+    min-width:0;
+
+    height:70px;
+
+    overflow:hidden;
+
+}
+
+
+/* =========================================================
+   NORMAL NAVIGATION
+========================================================= */
+
+.cezooPremiumNav{
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    transition:
+        opacity .3s ease,
+        transform .35s ease;
+
+}
+
+
+.cezooPremiumBtn{
+
+    flex:1;
+
+    height:100%;
+
+    border:0;
+
+    outline:0;
+
+    background:transparent;
+
+    color:#999;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:3px;
+
+    font-family:Arial,sans-serif;
+
+    font-size:10px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    -webkit-tap-highlight-color:transparent;
+
+}
+
+
+.cezooPremiumBtn.active{
+    color:#111;
+}
+
+
+.cezooPremiumIcon{
+
+    width:30px;
+    height:30px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:10px;
+
+    font-size:21px;
+
+}
+
+
+.cezooPremiumBtn.active
+.cezooPremiumIcon{
+
+    background:#f2f3f3;
+
+}
+
+
+/* =========================================================
+   GREEN ONLINE AREA
+========================================================= */
+
+.cezooPremiumWelcome{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            120deg,
+            #056c4e 0%,
+            #078c62 45%,
+            #12b77d 100%
+        );
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transform:translateY(12px);
+
+    transition:
+        opacity .35s ease,
+        transform .4s ease,
+        visibility .35s ease;
+
+}
+
+
+/* =========================================================
+   GREEN BACKGROUND EFFECTS
+========================================================= */
+
+.cezooPremiumWelcome::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:190px;
+    height:190px;
+
+    left:-75px;
+    top:-115px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.11);
+
+}
+
+
+.cezooPremiumWelcome::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    right:-60px;
+    bottom:-110px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.09);
+
+}
+
+
+.greenGlow{
+
+    position:absolute;
+
+    border-radius:50%;
+
+}
+
+
+.glowA{
+
+    width:90px;
+    height:90px;
+
+    right:20%;
+    top:-65px;
+
+    background:
+        rgba(255,255,255,.07);
+
+}
+
+
+.glowB{
+
+    width:60px;
+    height:60px;
+
+    left:35%;
+    bottom:-45px;
+
+    background:
+        rgba(255,255,255,.07);
+
+}
+
+
+/* =========================================================
+   ROAD
+========================================================= */
+
+.deliveryRoad{
+
+    position:absolute;
+
+    left:0;
+    right:0;
+
+    bottom:6px;
+
+    height:13px;
+
+    z-index:2;
+
+}
+
+
+.roadBase{
+
+    position:absolute;
+
+    left:0;
+    right:0;
+
+    bottom:1px;
+
+    height:2px;
+
+    background:
+        rgba(255,255,255,.42);
+
+}
+
+
+.roadDash{
+
+    position:absolute;
+
+    bottom:1px;
+
+    width:24px;
+    height:2px;
+
+    border-radius:5px;
+
+    background:
+        rgba(255,255,255,.75);
+
+    animation:
+        roadMove 2.5s linear infinite;
+
+}
+
+
+.dash1{
+    left:5%;
+}
+
+.dash2{
+    left:42%;
+    animation-delay:.8s;
+}
+
+.dash3{
+    left:78%;
+    animation-delay:1.6s;
+}
+
+
+@keyframes roadMove{
+
+    from{
+        transform:translateX(-70px);
+    }
+
+    to{
+        transform:translateX(500px);
+    }
+
+}
+
+
+/* =========================================================
+   DELIVERY IMAGE
+========================================================= */
+
+/* =========================
+   DELIVERY IMAGE - FIXED
+========================= */
+
+.deliveryRider{
+    position:absolute;
+
+    width:100px;
+    height:auto;
+
+    left:-180px;
+    bottom:-10px;
+
+    z-index:4;
+
+    pointer-events:none;
+
+    animation:
+        deliveryRide
+        7s
+        linear
+        infinite;
+}
+
+.deliveryRider img{
+    display:block;
+
+    width:90px;
+    height:auto;
+
+    max-width:none;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(
+            0 3px 3px
+            rgba(0,0,0,.18)
+        );
+}
+
+
+/* =========================
+   MOVEMENT
+========================= */
+
+@keyframes deliveryRide{
+
+    0%{
+        left:-180px;
+        transform:translateY(0);
+    }
+
+    25%{
+        transform:translateY(-1px);
+    }
+
+    50%{
+        transform:translateY(0);
+    }
+
+    75%{
+        transform:translateY(-1px);
+    }
+
+    100%{
+        left:calc(100% + 20px);
+        transform:translateY(0);
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .deliveryRider{
+        width:125px;
+        left:-150px;
+        bottom:2px;
+
+        animation:
+            deliveryRideMobile
+            6s
+            linear
+            infinite;
+    }
+
+    .deliveryRider img{
+        width:125px;
+        height:auto;
+    }
+}
+
+
+@keyframes deliveryRideMobile{
+
+    0%{
+        left:-150px;
+        transform:translateY(0);
+    }
+
+    25%{
+        transform:translateY(-1px);
+    }
+
+    50%{
+        transform:translateY(0);
+    }
+
+    75%{
+        transform:translateY(-1px);
+    }
+
+    100%{
+        left:calc(100% + 15px);
+        transform:translateY(0);
+    }
+}
+
+
+
+
+/* =========================================================
+   WELCOME CONTENT
+========================================================= */
+
+.cezooWelcomeContent{
+
+    position:relative;
+
+    z-index:7;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+
+.cezooWelcomeCircle{
+
+    width:39px;
+    height:39px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.18);
+
+    border:
+        1px solid
+        rgba(255,255,255,.40);
+
+    box-shadow:
+        inset 0 1px 1px
+        rgba(255,255,255,.3),
+        0 6px 16px
+        rgba(0,0,0,.13);
+
+}
+
+
+.cezooCheck{
+
+    width:25px;
+    height:25px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    color:#079467;
+
+    font-size:16px;
+
+    font-weight:900;
+
+}
+
+
+/* =========================================================
+   WELCOME TEXT
+========================================================= */
+
+.cezooWelcomeText{
+
+    position:relative;
+
+    z-index:8;
+
+}
+
+
+.cezooWelcomeTitle{
+
+    color:#fff;
+
+    font-family:Arial,sans-serif;
+
+    font-size:15px;
+
+    font-weight:800;
+
+    line-height:1.1;
+
+}
+
+
+.cezooWelcomeSubtitle{
+
+    display:flex;
+
+    align-items:center;
+
+    margin-top:5px;
+
+    color:
+        rgba(255,255,255,.82);
+
+    font-size:9px;
+
+    font-weight:600;
+
+}
+
+
+/* =========================================================
+   ONLINE DOT
+========================================================= */
+
+.onlinePulse{
+
+    width:7px;
+    height:7px;
+
+    margin-right:5px;
+
+    border-radius:50%;
+
+    background:#e1fff2;
+
+    animation:
+        onlinePulse 1.8s infinite;
+
+}
+
+
+@keyframes onlinePulse{
+
+    0%{
+        box-shadow:
+            0 0 0 0
+            rgba(225,255,242,.55);
+    }
+
+    70%{
+        box-shadow:
+            0 0 0 6px
+            rgba(225,255,242,0);
+    }
+
+    100%{
+        box-shadow:
+            0 0 0 0
+            rgba(225,255,242,0);
+    }
+
+}
+
+
+/* =========================================================
+   SHINE
+========================================================= */
+
+.cezooShine{
+
+    position:absolute;
+
+    top:-30px;
+    left:-100px;
+
+    width:50px;
+    height:150px;
+
+    background:
+        rgba(255,255,255,.10);
+
+    transform:rotate(25deg);
+
+    animation:
+        shineMove 4s ease-in-out infinite;
+
+}
+
+
+@keyframes shineMove{
+
+    0%{
+        left:-100px;
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    45%{
+        left:110%;
+        opacity:.7;
+    }
+
+    55%{
+        opacity:0;
+    }
+
+    100%{
+        left:110%;
+        opacity:0;
+    }
+
+}
+
+
+/* =========================================================
+   RIGHT CONTROL
+========================================================= */
+
+.cezooPremiumControl{
+
+    width:78px;
+
+    height:70px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:4px;
+
+    background:#fff;
+
+    border-left:
+        1px solid #eeeeee;
+
+}
+
+
+/* =========================================================
+   SWITCH
+========================================================= */
+
+.cezooPremiumSwitch{
+
+    position:relative;
+
+    width:42px;
+    height:23px;
+
+    display:block;
+
+    cursor:pointer;
+
+}
+
+
+.cezooPremiumSwitch input{
+
+    position:absolute;
+
+    opacity:0;
+
+    width:0;
+    height:0;
+
+}
+
+
+.cezooPremiumSlider{
+
+    position:absolute;
+
+    inset:0;
+
+    background:#d5d5d5;
+
+    border-radius:50px;
+
+    transition:.3s ease;
+
+}
+
+
+.cezooPremiumSlider::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:17px;
+    height:17px;
+
+    left:3px;
+    top:3px;
+
+    background:#fff;
+
+    border-radius:50%;
+
+    box-shadow:
+        0 2px 6px
+        rgba(0,0,0,.25);
+
+    transition:.3s ease;
+
+}
+
+
+.cezooPremiumSwitch
+input:checked
++
+.cezooPremiumSlider{
+
+    background:
+        linear-gradient(
+            135deg,
+            #078b61,
+            #12b77d
+        );
+
+    box-shadow:
+        0 3px 12px
+        rgba(8,157,108,.30);
+
+}
+
+
+.cezooPremiumSwitch
+input:checked
++
+.cezooPremiumSlider::before{
+
+    transform:
+        translateX(19px);
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.cezooPremiumStatus{
+
+    color:#999;
+
+    font-size:8px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+}
+
+
+/* =========================================================
+   ONLINE STATE
+========================================================= */
+
+.cezooPremiumBar.online
+.cezooPremiumNav{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transform:
+        translateY(12px);
+
+    pointer-events:none;
+
+}
+
+
+.cezooPremiumBar.online
+.cezooPremiumWelcome{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:
+        translateY(0);
+
+}
+
+
+.cezooPremiumBar.online{
+
+    box-shadow:
+        0 14px 40px
+        rgba(5,145,99,.23),
+        0 4px 10px
+        rgba(0,0,0,.05);
+
+}
+
+
+.cezooPremiumBar.online
+.cezooPremiumStatus{
+
+    color:#0a9b6a;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px){
+
+    body{
+
+        padding-bottom:
+            calc(
+                83px +
+                env(safe-area-inset-bottom)
+            );
+
+    }
+
+
+    .cezooPremiumBar{
+
+        left:7px;
+        right:7px;
+
+        bottom:
+            calc(
+                7px +
+                env(safe-area-inset-bottom)
+            );
+
+        height:65px;
+
+        border-radius:19px;
+
+    }
+
+
+    .cezooPremiumLeft{
+
+        height:65px;
+
+    }
+
+
+    .cezooPremiumControl{
+
+        width:70px;
+
+        height:65px;
+
+    }
+
+
+    .cezooPremiumBtn{
+
+        font-size:8px;
+
+    }
+
+
+    .cezooPremiumIcon{
+
+        width:27px;
+        height:27px;
+
+        font-size:19px;
+
+    }
+
+
+    .deliveryRider{
+    width:80px;
+    height:auto;
+
+    left:-100px;
+
+    bottom:-10px;
+
+    animation:
+        deliveryRideMobile
+        6s
+        linear
+        infinite;
+}
+
+.deliveryRider img{
+    width:80px;
+    height:auto;
+    display:block;
+}
+
+
+    .cezooWelcomeCircle{
+
+        width:35px;
+        height:35px;
+
+    }
+
+
+    .cezooCheck{
+
+        width:23px;
+        height:23px;
+
+        font-size:14px;
+
+    }
+
+
+    .cezooWelcomeTitle{
+
+        font-size:13px;
+
+    }
+
+
+    .cezooWelcomeSubtitle{
+
+        font-size:8px;
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE DELIVERY MOVEMENT
+========================================================= */
+
+@keyframes deliveryRideMobile{
+
+    0%{
+
+        left:-160px;
+
+        transform:
+            translateY(1px);
+
+    }
+
+    25%{
+
+        transform:
+            translateY(-1px);
+
+    }
+
+    50%{
+
+        transform:
+            translateY(1px);
+
+    }
+
+    75%{
+
+        transform:
+            translateY(-1px);
+
+    }
+
+    100%{
+
+        left:calc(100% + 15px);
+
+        transform:
+            translateY(1px);
+
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media(max-width:360px){
+
+    .cezooPremiumControl{
+
+        width:64px;
+
+    }
+
+
+    .deliveryRider{
+
+        width:120px;
+        height:75px;
+
+        left:-135px;
+
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    .deliveryRider,
+    .roadDash,
+    .cezooShine,
+    .onlinePulse{
+
+        animation:none;
+
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     YOUR EXISTING PAGE CONTENT
+     
+     Paina mee existing content ikkada unchanged ga untundi.
+     Bottom bar maatrame below add chestunnam.
+========================================================= -->
+
+
+<!-- =========================================================
+     CEZOO PREMIUM BOTTOM BAR
+========================================================= -->
+
+<div
+    class="cezooPremiumBar"
+    id="cezooPremiumBar"
+>
+
+
+    <!-- =====================================================
+         LEFT AREA
+    ====================================================== -->
+
+    <div class="cezooPremiumLeft">
+
+
+        <!-- NORMAL NAVIGATION -->
+
+        <div class="cezooPremiumNav">
+
+
+            <button
+                class="cezooPremiumBtn active"
+                onclick="cezooPremiumNav('home',this)"
+            >
+
+                <span class="cezooPremiumIcon">
+                    ⌂
+                </span>
+
+                <span>
+                    Home
+                </span>
+
+            </button>
+
+
+            <button
+                class="cezooPremiumBtn"
+                onclick="cezooPremiumNav('reorder',this)"
+            >
+
+                <span class="cezooPremiumIcon">
+                    ↻
+                </span>
+
+                <span>
+                    Re-order
+                </span>
+
+            </button>
+
+
+            <button
+                class="cezooPremiumBtn"
+                onclick="cezooPremiumNav('xerox',this)"
+            >
+
+                <span class="cezooPremiumIcon">
+                    ▣
+                </span>
+
+                <span>
+                    Xerox
+                </span>
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             GREEN ONLINE AREA
+        ================================================== -->
+
+        <div
+            class="cezooPremiumWelcome"
+            id="cezooPremiumWelcome"
+        >
+
+
+            <!-- Background decoration -->
+
+            <div class="greenGlow glowA"></div>
+
+            <div class="greenGlow glowB"></div>
+
+
+
+            <!-- ROAD -->
+
+            <div class="deliveryRoad">
+
+                <div class="roadBase"></div>
+
+                <div
+                    class="roadDash dash1"
+                ></div>
+
+                <div
+                    class="roadDash dash2"
+                ></div>
+
+                <div
+                    class="roadDash dash3"
+                ></div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DELIVERY IMAGE
+            ================================================== -->
+
+            <div class="deliveryRider">
+
+                <img
+                    src="download (2).png"
+                    alt="Delivery Boy"
+                >
+
+            </div>
+
+
+
+            <!-- =================================================
+                 WELCOME TEXT
+            ================================================== -->
+
+            <div class="cezooWelcomeContent">
+
+
+                <div class="cezooWelcomeCircle">
+
+                    <div class="cezooCheck">
+                        ✓
+                    </div>
+
+                </div>
+
+
+                <div class="cezooWelcomeText">
+
+                    <div class="cezooWelcomeTitle">
+                        Welcome to CEZOO
+                    </div>
+
+
+                    <div class="cezooWelcomeSubtitle">
+
+                        <span
+                            class="onlinePulse"
+                        ></span>
+
+                        You're online & ready
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- Shine -->
+
+            <div class="cezooShine"></div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         RIGHT ON / OFF CONTROL
+    ====================================================== -->
+
+    <div class="cezooPremiumControl">
+
+
+        <label
+            class="cezooPremiumSwitch"
+        >
+
+            <input
+                type="checkbox"
+                id="cezooPremiumToggle"
+                onchange="cezooPremiumStatus()"
+            >
+
+            <span
+                class="cezooPremiumSlider"
+            ></span>
+
+        </label>
+
+
+        <span
+            class="cezooPremiumStatus"
+            id="cezooPremiumStatus"
+        >
+            OFF
+        </span>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function cezooPremiumNav(
+    type,
+    button
+){
+
+    document
+        .querySelectorAll(
+            ".cezooPremiumBtn"
+        )
+        .forEach(function(btn){
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    button.classList.add(
+        "active"
+    );
+
+
+    if(type === "home"){
+
+        console.log("Home");
+
+    }
+
+
+    if(type === "reorder"){
+
+        console.log("Re-order");
+
+    }
+
+
+    if(type === "xerox"){
+
+        console.log("Xerox");
+
+    }
+
+}
+
+
+/* =========================================================
+   ONLINE / OFFLINE
+========================================================= */
+
+function cezooPremiumStatus(){
+
+    const toggle =
+        document.getElementById(
+            "cezooPremiumToggle"
+        );
+
+
+    const bar =
+        document.getElementById(
+            "cezooPremiumBar"
+        );
+
+
+    const status =
+        document.getElementById(
+            "cezooPremiumStatus"
+        );
+
+
+    if(toggle.checked){
+
+        bar.classList.add(
+            "online"
+        );
+
+        status.textContent =
+            "ON";
+
+
+        localStorage.setItem(
+            "cezooPremiumOnline",
+            "true"
+        );
+
+    }
+
+    else{
+
+        bar.classList.remove(
+            "online"
+        );
+
+        status.textContent =
+            "OFF";
+
+
+        localStorage.setItem(
+            "cezooPremiumOnline",
+            "false"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RESTORE PREVIOUS STATE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        const saved =
+            localStorage.getItem(
+                "cezooPremiumOnline"
+            );
+
+
+        const toggle =
+            document.getElementById(
+                "cezooPremiumToggle"
+            );
+
+
+        if(saved === "true"){
+
+            toggle.checked = true;
+
+        }
+
+
+        cezooPremiumStatus();
+
+    }
+);
+
+</script>
+
+
+</body>
+</html>
+
